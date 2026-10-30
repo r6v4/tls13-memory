@@ -2,7 +2,10 @@
 openssl tls1.3 memory-bio written by doubao.
 
 ## example 
-
+```bash
+openssl genrsa -out server.key 2048
+openssl req -new -key server.key -out server.csr
+```
 ```common-lisp
 (ql:quickload '(:cffi :babel))
 
@@ -10,7 +13,7 @@ openssl tls1.3 memory-bio written by doubao.
 ;(load "openssl-memory-tls.lisp")
 ;(load "tls13-memory-server-example.lisp")
 
-(setf server-ctx (tls13-memory-server::create-tls13-server-context "localhost.crt" "localhost.key"))
+(setf server-ctx (tls13-memory-server::create-tls13-server-context "server.crt" "server.key"))
 (setf my-socket (make-instance 'sb-bsd-sockets:inet-socket :type :stream :protocol :tcp))
 (setf my-address (sb-bsd-sockets:make-inet-address "127.0.0.1"))
 (sb-bsd-sockets:socket-bind my-socket my-address 8888 :reuse-address t)
