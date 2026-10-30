@@ -3,6 +3,7 @@
 ;;;; 依赖：CFFI, OpenSSL (Ubuntu 下 libssl-dev 包)
 ;;;; 设计原则：显式创建/释放，减少宏封装，函数命名完整语义化
 ;;;; 修正说明：修复括号语法错误，修复悬空指针缺陷，统一错误处理逻辑
+(in-package :cl-user)
 
 (defpackage #:openssl-memory-bio
   (:use #:cl #:cffi)
