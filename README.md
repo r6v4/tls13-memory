@@ -4,7 +4,7 @@ openssl tls1.3 memory-bio written by doubao.
 ## example 
 ```bash
 openssl genrsa -out server.key 2048
-openssl req -new -key server.key -out server.csr
+openssl req -new -key server.key -out server.crt
 ```
 ```common-lisp
 (ql:quickload '(:cffi :babel "tls13-memory"))
