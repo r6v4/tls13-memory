@@ -41,5 +41,8 @@ openssl tls1.3 memory-bio written by doubao.
             (tls13-memory-server::tls13-server-handle-input server-conn empty-bytes)
             (sb-bsd-sockets:socket-send my-client response-cipher nil)))
 
+(handshake my-client server-conn)
+(handshake my-client server-conn)
+(tlsreceive my-client server-conn)
 
 ```
