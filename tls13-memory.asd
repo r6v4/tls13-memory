@@ -7,10 +7,6 @@
     :components (
         (:static-file "LICENSE")
         (:file "package")
-        (:module "code"
-            :serial t
-            :components
-                (   
-                    (:file "openssl-memory-bio") 
-                    (:file "openssl-memory-tls")
-                    (:file "tls13-memory-server-example") ))))
+        (:file "openssl-memory-bio") 
+        (:file "openssl-memory-tls")
+        (:file "tls13-memory-server-example") ))
