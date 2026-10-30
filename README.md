@@ -1,7 +1,7 @@
 # tls13-memory
 openssl tls1.3 memory-bio written by doubao.
 
-##example 
+## example 
 
 ```common-lisp
 (ql:quickload '(:cffi :babel))
@@ -21,7 +21,7 @@ openssl tls1.3 memory-bio written by doubao.
 (setf server-conn (tls13-memory-server::create-tls13-server-connection server-ctx))
 (cffi:use-foreign-library openssl-memory-tls::libssl)
 
-(defun handshake (my-client server-conn) ;need two step
+(defun handshake (my-client server-conn) 
     (multiple-value-bind (a b) (sb-bsd-sockets:socket-receive my-client nil 4096 :element-type '(unsigned-byte 8) :dontwait t)
         (setf a (subseq a 0 b))
         (multiple-value-bind (server-out server-state)
@@ -44,5 +44,10 @@ openssl tls1.3 memory-bio written by doubao.
 (handshake my-client server-conn)
 (handshake my-client server-conn)
 (tlsreceive my-client server-conn)
-
+(setf server-message "HTTP/1.1 200 OK ~A
+Content-Type: text/html; charset=UTF-8~A
+Content-Length: 3~A
+~A
+200" #\return #\return #\return #\return)
+(tlssend my-client server-conn server-message)
 ```
