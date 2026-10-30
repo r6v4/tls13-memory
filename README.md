@@ -55,6 +55,6 @@ Content-Length: 3~A
 (tlssend my-client server-conn server-message)
 ```
 ```bash
-https://127.0.0.1:8888/
+curl -k https://127.0.0.1:8888/
 ```
 
