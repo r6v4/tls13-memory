@@ -7,7 +7,7 @@ openssl genrsa -out server.key 2048
 openssl req -new -key server.key -out server.csr
 ```
 ```common-lisp
-(ql:quickload '(:cffi :babel))
+(ql:quickload '(:cffi :babel "tls13-memory"))
 
 ;(load "openssl-memory-bio.lisp")
 ;(load "openssl-memory-tls.lisp")
@@ -54,3 +54,7 @@ Content-Length: 3~A
 200" #\return #\return #\return #\return)
 (tlssend my-client server-conn server-message)
 ```
+```bash
+https://127.0.0.1:8888/
+```
+
