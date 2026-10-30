@@ -1,7 +1,7 @@
 (in-package :cl-user)
 
 (defpackage #:tls13-memory
-  (:use #:cl #:cffi #:openssl-memory-bio)
+  (:use #:cl #:cffi)
   (:export
    #:create-tls13-server-context
    #:tls13-server-connection
