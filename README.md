@@ -29,7 +29,7 @@ openssl req -new -key server.key -out server.crt
         (setf a (subseq a 0 b))
         (multiple-value-bind (server-out server-state)
             (tls13-memory::tls13-server-handle-input server-conn a)
-            (sb-bsd-sockets:socket-send my-client server-out nil) ))
+            (sb-bsd-sockets:socket-send my-client server-out nil) )))
             
 (defun tlsreceive (my-client server-conn)
     (multiple-value-bind (a b) (sb-bsd-sockets:socket-receive my-client nil 4096 :element-type '(unsigned-byte 8) :dontwait t)
@@ -47,11 +47,12 @@ openssl req -new -key server.key -out server.crt
 (handshake my-client server-conn)
 (handshake my-client server-conn)
 (tlsreceive my-client server-conn)
-(setf server-message "HTTP/1.1 200 OK ~A
+(setf server-message (sb-ext:string-to-octets 
+"HTTP/1.1 200 OK ~A
 Content-Type: text/html; charset=UTF-8~A
 Content-Length: 3~A
 ~A
-200" #\return #\return #\return #\return)
+200" #\return #\return #\return #\return))
 (tlssend my-client server-conn server-message)
 ```
 ```bash
