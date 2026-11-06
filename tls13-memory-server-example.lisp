@@ -2,6 +2,20 @@
 ;;;; 与网络完全解耦的 TLS 1.3 服务端实现示例
 ;;;; 修正说明：常量本地定义，消除跨包符号依赖；修复空向量类型校验
 
+(defpackage #:tls13-memory
+  (:use #:cl #:cffi #:openssl-memory-bio #:openssl-memory-tls)
+  (:shadow #:read)
+  (:export
+   #:create-tls13-server-context
+   #:tls13-server-connection
+   #:tls13-connection-state
+   #:create-tls13-server-connection
+   #:free-tls13-server-connection
+   #:tls13-server-handle-input
+   #:generate-application-response
+   #:tls13-server-send-response
+   #:run-tls13-memory-server-test))
+
 (in-package #:tls13-memory)
 
 ;;; ============================================================================
