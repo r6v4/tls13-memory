@@ -47,12 +47,12 @@ openssl req -new -key server.key -out server.crt
 (handshake my-client server-conn)
 (handshake my-client server-conn)
 (tlsreceive my-client server-conn)
-(setf server-message (sb-ext:string-to-octets 
+(setf server-message (sb-ext:string-to-octets (format nil 
 "HTTP/1.1 200 OK ~A
 Content-Type: text/html; charset=UTF-8~A
 Content-Length: 3~A
 ~A
-200" #\return #\return #\return #\return))
+200" #\return #\return #\return #\return)))
 (tlssend my-client server-conn server-message)
 ```
 ```bash
