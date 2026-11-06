@@ -7,11 +7,11 @@ openssl genrsa -out server.key 2048
 openssl req -new -key server.key -out server.crt
 ```
 ```common-lisp
-(ql:quickload '(:cffi :babel "tls13-memory"))
+(ql:quickload '(:cffi :babel ))
 
-;(load "openssl-memory-bio.lisp")
-;(load "openssl-memory-tls.lisp")
-;(load "tls13-memory-server-example.lisp")
+(load "openssl-memory-bio.lisp")
+(load "openssl-memory-tls.lisp")
+(load "tls13-memory-server-example.lisp")
 
 (setf server-ctx (tls13-memory::create-tls13-server-context "server.crt" "server.key"))
 (setf my-socket (make-instance 'sb-bsd-sockets:inet-socket :type :stream :protocol :tcp))
