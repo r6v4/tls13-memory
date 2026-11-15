@@ -46,9 +46,9 @@ openssl req -x509 -newkey rsa:2048 \
 
 (defun tlssend (my-client server-conn server-message)
     (tls13-memory::tls13-server-send-response server-conn server-message)
-        (multiple-value-bind (response-cipher)
-            (tls13-memory::tls13-server-handle-input server-conn empty-bytes)
-            (sb-bsd-sockets:socket-send my-client response-cipher nil)))
+    (multiple-value-bind (response-cipher)
+        (tls13-memory::tls13-server-handle-input server-conn empty-bytes)
+        (sb-bsd-sockets:socket-send my-client response-cipher nil)))
 #|
 curl -vk --tlsv1.3 --tls-max 1.3 \
     https://127.0.0.1:8888/
