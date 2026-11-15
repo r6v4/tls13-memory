@@ -49,9 +49,12 @@ openssl req -x509 -newkey rsa:2048 \
         (multiple-value-bind (response-cipher)
             (tls13-memory::tls13-server-handle-input server-conn empty-bytes)
             (sb-bsd-sockets:socket-send my-client response-cipher nil)))
+#|
+curl -vk --tlsv1.3 --tls-max 1.3 \
+    https://127.0.0.1:8888/
+|#
+(handshake my-client server-conn)
 
-(handshake my-client server-conn)
-(handshake my-client server-conn)
 (tlsreceive my-client server-conn)
 (setf server-message (sb-ext:string-to-octets (format nil 
 "HTTP/1.1 200 OK ~A
@@ -60,8 +63,6 @@ Content-Length: 3~A
 ~A
 200" #\return #\return #\return #\return)))
 (tlssend my-client server-conn server-message)
-```
-```bash
-curl -k https://127.0.0.1:8888/
+
 ```
 
