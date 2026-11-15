@@ -3,8 +3,14 @@ openssl tls1.3 memory-bio written by doubao.
 
 ## example 
 ```bash
-openssl genrsa -out server.key 2048
-openssl req -new -key server.key -out server.crt
+openssl req -x509 -newkey rsa:2048 \
+    -keyout server.key \
+    -out server.crt \
+    -days 3650 \
+    -nodes \
+    -subj "/CN=localhost" \
+    -addext "subjectAltName=DNS:localhost,IP:127.0.0.1"
+
 ```
 ```common-lisp
 (ql:quickload '(:cffi :babel ))
